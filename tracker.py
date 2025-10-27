@@ -716,6 +716,6 @@ class Tracker(object):
 
 
 if __name__ == '__main__':
-    config = parse_args()
-    ff = Tracker(config, device='cuda:0')
-    ff.run()
+    for config in parse_args():
+        ff = Tracker(config, device='cuda:0')
+        ff.run()
