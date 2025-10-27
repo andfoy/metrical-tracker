@@ -85,6 +85,8 @@ def parse_args():
         for dir in dirs:    
             cfg = get_cfg_defaults()
             cfg_file = osp.join(root, dir, 'config.yaml')
+            if dir[0] == '.':
+                continue
             if osp.exists(cfg_file):
                 cfg = update_cfg(cfg, cfg_file)
                 cfg.cfg_file = cfg_file
