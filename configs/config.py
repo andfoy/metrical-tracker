@@ -14,6 +14,8 @@
 #
 # Contact: mica@tue.mpg.de
 
+import os
+import os.path as osp
 import argparse
 from pathlib import Path
 
@@ -74,20 +76,22 @@ def update_cfg(cfg, cfg_file):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', type=str, help='Configuration file', required=True)
+    parser.add_argument('--input-dir', type=str, help='Input dir', required=True)
 
     args = parser.parse_args()
     print(args, end='\n\n')
 
-    cfg = get_cfg_defaults()
-    if args.cfg is not None:
-        cfg_file = args.cfg
-        cfg = update_cfg(cfg, args.cfg)
-        cfg.cfg_file = cfg_file
-
-    cfg.config_name = Path(args.cfg).stem
-
-    return cfg
+    for root, dirs, _ in os.walk(args.input_dir):
+        for dir in dirs:    
+            cfg = get_cfg_defaults()
+            cfg_file = osp.join(root, dir, 'config.yaml')
+            if osp.exists(cfg_file)
+                cfg = update_cfg(cfg, cfg_file)
+                cfg.cfg_file = cfg_file
+        
+            cfg.config_name = Path(args.cfg).stem
+        
+            yield cfg
 
 
 def parse_cfg(cfg_file):
