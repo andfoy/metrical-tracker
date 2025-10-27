@@ -89,7 +89,7 @@ def parse_args():
                 cfg = update_cfg(cfg, cfg_file)
                 cfg.cfg_file = cfg_file
         
-            cfg.config_name = Path(args.cfg).stem
+            cfg.config_name = Path(cfg_file).stem
             yield cfg
         break
         
