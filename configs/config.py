@@ -90,9 +90,9 @@ def parse_args():
                 cfg.cfg_file = cfg_file
         
             cfg.config_name = Path(args.cfg).stem
-        
             yield cfg
-
+        break
+        
 
 def parse_cfg(cfg_file):
     cfg = get_cfg_defaults()
